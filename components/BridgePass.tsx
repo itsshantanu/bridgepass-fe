@@ -165,7 +165,9 @@ const BridgePass = () => {
               This Bridge Gift Card use transfer ETH from one chain to other
             </h2>
             <div className="mb-5">
-              <p className="text-black mr-2 ">Price: 0.03 ETH</p>
+              <p className="text-black mr-2 ">
+                Price: {utils.formatEther(config.price)} ETH
+              </p>
             </div>
             <div className="mb-4">
               <label className="mr-2 text-black" htmlFor="sourceChain">
