@@ -139,7 +139,7 @@ export default function App({ Component, pageProps }: AppProps) {
             showRecentTransactions={true}
           >
             <Navbar />
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
           </RainbowKitProvider>
         </WagmiConfig>
       </NextUIProvider>
