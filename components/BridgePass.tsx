@@ -131,6 +131,10 @@ const BridgePass = () => {
         err.message.includes('resolver or addr is not configured for')
       ) {
         setErrMsg('Enter the address pls');
+      } else if (
+        err.message.includes('sending a transaction requires a signer ')
+      ) {
+        setErrMsg('Please connect your wallet');
       } else {
         setErrMsg('Something went wrong');
       }
