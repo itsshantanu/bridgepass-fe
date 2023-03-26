@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAccount, useContract, useSigner } from 'wagmi';
 import LoadModal from './LoadModal';
+import { v4 as uuidv4 } from 'uuid';
+import { Polybase } from "@polybase/client";
+
+const db = new Polybase({
+  defaultNamespace: `${process.env.NEXT_PUBLIC_DEFAULT_NAMESPACE}`,
+});
 
 interface ChainConfig {
   contractAddress: string;
@@ -45,7 +51,7 @@ const chainConfig: ChainConfigs = {
     contractAddress: '0x463e6d4993d30D9f2987a4C53d4E4a18DE195586', // Op Mainnet address
     destinationWrapper: '0x429b9eb01362b2799131EfCC44319689b662999D', // Replace with Polygon values
     wethAddress: '0x4200000000000000000000000000000000000006', // Replace with Polygon values
-    relayerFee: Number(BigInt('3000000000000000')),
+    relayerFee: Number(BigInt('300000000000000')),
     destinationDomain: 1634886255,
     slippage: 300,
     explorer: 'https://optimistic.etherscan.io/tx/',
@@ -54,13 +60,13 @@ const chainConfig: ChainConfigs = {
   // For Arbitrum Mainnet to Optimism Mainnet
 
   option4: {
-    contractAddress: '0xB5a6Ba7c9B16D358f06909C753Bb150ceb9ef70b', // todo
+    contractAddress: '0x7bFDe3c8a9444882FbEB20e7CB2c992925102792', // todo
     destinationWrapper: '0x7Fe09d217d646a6213e51b237670Bc326188cB93', // Replace with Polygon values
     wethAddress: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // Replace with Polygon values
-    relayerFee: Number(BigInt('3000000000000000')),
+    relayerFee: Number(BigInt('300000000000000')),
     destinationDomain: 1869640809,
     slippage: 300,
-    explorer: 'https://polygonscan.com/tx/',
+    explorer: 'https://arbiscan.io/tx/',
   },
 };
 
@@ -71,7 +77,7 @@ const PassRedeem = () => {
   const [addr, setAddr] = useState('');
   const [tokenId, setTokenId] = useState('');
   const [selectedOption, setSelectedOption] = useState('option1');
-
+  const [fetchedHash, setFetchedHash] = useState('');
   // Modal
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = React.useState(false);
@@ -83,6 +89,19 @@ const PassRedeem = () => {
     setVisible(false);
     console.log('closed');
   };
+
+  let fetchedTxHash: string;
+
+  const fetchRedeemedPass = async () => { 
+    const { data } = await db.collection('transactionInfo').where('address', '==', `${address}`).get();
+    // console.log(data);
+
+    fetchedTxHash = data[0]?.data.txHash ? data[0].data.txHash : '';
+    setFetchedHash(fetchedTxHash);
+    // console.log(fetchedTxHash);
+  };
+
+  fetchRedeemedPass();
 
   const contractAbi = [
     {
@@ -146,7 +165,7 @@ const PassRedeem = () => {
     signerOrProvider: signer,
   });
 
-  console.log(selectedOption);
+  // console.log(selectedOption);
 
   //   relayer fee
 
@@ -170,6 +189,18 @@ const PassRedeem = () => {
       setHash(txResult.transactionHash);
       setLoading(false);
       console.log(txResult.transactionHash);
+
+      //polybase Integration
+      const id = uuidv4();
+      const userAddress = address;
+      const txHash = txResult.transactionHash;
+
+      try {
+        await db.collection('transactionInfo').create([id, userAddress, txHash]);
+      } catch (err) {
+        console.log(err);
+      }
+
     } catch (err: any) {
       setLoading(false);
       setIsError(true);
@@ -284,6 +315,26 @@ const PassRedeem = () => {
               // errorMessage={errMsg}
               errorMessage={isError ? errMsg : ''}
             />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="w-full sm:w-[400px] md:w-[650px] lg:w-[802px] h-[107px] bg-purple-400 p-4 mt-12 sm:mt-[12%] mb-12 rounded shadow flex justify-center items-center">
+            <div>
+              <h2 className="text-xl text-white font-bold text-center">
+                Check Your Transactions on Connext Explorer
+              </h2>
+              <a
+                onClick={() =>
+                  window.open(
+                    `https://testnet.connextscan.io/tx/${fetchedHash}`,
+                    '_blank'
+                  )
+                }
+                className="text-white text-center block underline"
+              >
+                {fetchedHash}
+              </a>
+            </div>
           </div>
         </div>
       </main>

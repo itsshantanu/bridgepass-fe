@@ -42,7 +42,7 @@ const chainConfig: ChainConfigs = {
 
   option4: {
     contractAddress: '0x7bFDe3c8a9444882FbEB20e7CB2c992925102792',
-    price: utils.parseEther('0.001'),
+    price: utils.parseEther('0.0004'),
     explorer: 'https://optimistic.etherscan.io/tx/',
   },
 };
