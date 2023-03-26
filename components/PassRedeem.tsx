@@ -77,7 +77,7 @@ const PassRedeem = () => {
   const [addr, setAddr] = useState('');
   const [tokenId, setTokenId] = useState('');
   const [selectedOption, setSelectedOption] = useState('option1');
-  const [fetchedHash, setFetchedHash] = useState('');
+  const [fetchedHash, setFetchedHash] = useState(['']);
   // Modal
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = React.useState(false);
@@ -87,21 +87,28 @@ const PassRedeem = () => {
 
   const closeHandler = () => {
     setVisible(false);
-    console.log('closed');
+    // console.log('closed');
   };
-
-  let fetchedTxHash: string;
-
-  const fetchRedeemedPass = async () => { 
-    const { data } = await db.collection('transactionInfo').where('address', '==', `${address}`).get();
-    // console.log(data);
-
-    fetchedTxHash = data[0]?.data.txHash ? data[0].data.txHash : '';
-    setFetchedHash(fetchedTxHash);
-    // console.log(fetchedTxHash);
-  };
-
-  fetchRedeemedPass();
+ 
+  useEffect(() => {
+    
+    const fetchRedeemedPass = async () => {
+  
+      try {
+        const querySnapshot = await db.collection('transactionInfo').where('address', '==', `${address}`).get();
+        // console.log(querySnapshot.data);
+    
+        const fetchedTxHashes = querySnapshot.data.map((doc) => doc.data.txHash);
+    
+        setFetchedHash(fetchedTxHashes);
+        // console.log(fetchedTxHashes);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchRedeemedPass();
+  }, [address]);
+  
 
   const contractAbi = [
     {
@@ -204,10 +211,6 @@ const PassRedeem = () => {
     } catch (err: any) {
       setLoading(false);
       setIsError(true);
-      console.log('karm', err);
-      const msg = err.message;
-      const match = err.message.match();
-      console.log('karm', err.message);
 
       if (err.message.includes('user rejected transaction')) {
         setErrMsg('You Reject the transaction ');
@@ -318,22 +321,25 @@ const PassRedeem = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="w-full sm:w-[400px] md:w-[650px] lg:w-[802px] h-[107px] bg-purple-400 p-4 mt-12 sm:mt-[12%] mb-12 rounded shadow flex justify-center items-center">
+          <div className="w-full sm:w-[400px] md:w-[600px] lg:w-[802px] h-[107px] bg-purple-400 p-4 mt-12 sm:mt-[12%] mb-12 rounded shadow flex justify-center items-center">
             <div>
               <h2 className="text-xl text-white font-bold text-center">
                 Check Your Transactions on Connext Explorer
               </h2>
-              <a
-                onClick={() =>
-                  window.open(
-                    `https://testnet.connextscan.io/tx/${fetchedHash}`,
-                    '_blank'
-                  )
-                }
-                className="text-white text-center block underline"
-              >
-                {fetchedHash}
-              </a>
+              {fetchedHash.map((transactionHash, index) => (
+                <a
+                  key={index}
+                  onClick={() =>
+                    window.open(
+                      `https://testnet.connextscan.io/tx/${transactionHash}`,
+                      '_blank'
+                    )
+                  }
+                  className="text-white text-center block underline"
+                >
+                  {transactionHash}
+                </a>
+              ))}
             </div>
           </div>
         </div>
