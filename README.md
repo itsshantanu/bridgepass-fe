@@ -37,6 +37,7 @@ Bridge Pass is available on testnet and Mainnet.
 #### Mainnet Contracts
 
 - [Optimism](https://optimistic.etherscan.io/address/0x463e6d4993d30D9f2987a4C53d4E4a18DE195586)
+- [Arbitrum](https://arbiscan.io/address/0x7bFDe3c8a9444882FbEB20e7CB2c992925102792)
 
 #### Testnet
 
@@ -80,6 +81,15 @@ Gift Card is available on testnet and Mainnet.
 - [Next Js](https://nextjs.org/)
 - [Tailwind Css](https://tailwindcss.com/)
 - [Next UI](https://nextui.org/)
+
+## Sponsored Stacks
+
+- [Connext](https://www.connext.network/)
+- [Polybase](https://polybase.xyz/)
+- [Optimism](https://www.optimism.io/)
+- [Polygon ZKEVM](https://polygon.technology/polygon-zkevm)
+- [Scroll](https://scroll.io/)
+- [Taiko](https://taiko.xyz/)
 
 ## Testnet Faucet
 
