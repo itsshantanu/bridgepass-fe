@@ -136,6 +136,10 @@ const GiftRedeem = () => {
         setErrMsg('Please Enter the Gift Id');
       } else if (err.message.includes('invalid token ID')) {
         setErrMsg('Invalid Gift Id');
+      } else if (
+        err.message.includes('sending a transaction requires a signer ')
+      ) {
+        setErrMsg('Please connect your wallet');
       } else {
         setErrMsg('Something went wrong');
       }
