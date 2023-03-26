@@ -9,6 +9,7 @@ interface ChainConfig {
   relayerFee: number;
   destinationDomain: number;
   explorer: string;
+  slippage: number;
 }
 
 interface ChainConfigs {
@@ -23,6 +24,7 @@ const chainConfig: ChainConfigs = {
     wethAddress: '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
     relayerFee: Number(BigInt('20000000000000000')),
     destinationDomain: 1735356532,
+    slippage: 10000,
     explorer: 'https://goerli.etherscan.io/tx/',
   },
 
@@ -34,16 +36,18 @@ const chainConfig: ChainConfigs = {
     wethAddress: '0x74c6FD7D2Bc6a8F0Ebd7D78321A95471b8C2B806', // Replace with Mainnet values
     relayerFee: Number(BigInt('20000000000000000')), // Replace with Mainnet values
     destinationDomain: 1735353714,
+    slippage: 10000,
     explorer: 'https://goerli-optimism.etherscan.io/tx/',
   },
 
   // For Optimism Mainnet to Arbitrum Mainnet
   option3: {
-    contractAddress: '0xB5a6Ba7c9B16D358f06909C753Bb150ceb9ef70b', // todo
+    contractAddress: '0x463e6d4993d30D9f2987a4C53d4E4a18DE195586', // Op Mainnet address
     destinationWrapper: '0x429b9eb01362b2799131EfCC44319689b662999D', // Replace with Polygon values
     wethAddress: '0x4200000000000000000000000000000000000006', // Replace with Polygon values
-    relayerFee: 3000000000000000, // Replace with Polygon values
+    relayerFee: Number(BigInt('3000000000000000')),
     destinationDomain: 1634886255,
+    slippage: 300,
     explorer: 'https://optimistic.etherscan.io/tx/',
   },
 
@@ -53,8 +57,9 @@ const chainConfig: ChainConfigs = {
     contractAddress: '0xB5a6Ba7c9B16D358f06909C753Bb150ceb9ef70b', // todo
     destinationWrapper: '0x7Fe09d217d646a6213e51b237670Bc326188cB93', // Replace with Polygon values
     wethAddress: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // Replace with Polygon values
-    relayerFee: 3000000000000000, // Replace with Polygon values
+    relayerFee: Number(BigInt('3000000000000000')),
     destinationDomain: 1869640809,
+    slippage: 300,
     explorer: 'https://polygonscan.com/tx/',
   },
 };
@@ -123,7 +128,6 @@ const PassRedeem = () => {
           type: 'uint256',
         },
       ],
-      // Todo : name should changed to redeemGift
       name: 'redeemGiftCard',
       outputs: [],
       stateMutability: 'nonpayable',
@@ -146,7 +150,6 @@ const PassRedeem = () => {
 
   //   relayer fee
 
-  const relayerFee = chainConfig.option1.relayerFee.toString();
   const claimGift = async () => {
     setVisible(true);
     setLoading(true);
@@ -159,8 +162,8 @@ const PassRedeem = () => {
         100000000000000, // amount to receive
         addr, // receiver address
         config.destinationDomain, // destination domain
-        10000, //slippage
-        relayerFee, // relayer fee
+        config.slippage, //slippage
+        config.relayerFee.toString(), // relayer fee
         tokenId // Gift Card NFT token Id
       );
       const txResult = await pending.wait();
@@ -170,7 +173,7 @@ const PassRedeem = () => {
     } catch (err: any) {
       setLoading(false);
       setIsError(true);
-      console.log('karm', errMsg);
+      console.log('karm', err);
       const msg = err.message;
       const match = err.message.match();
       console.log('karm', err.message);

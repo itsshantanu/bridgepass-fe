@@ -41,9 +41,9 @@ const LoadModal = ({
           <>
             <Modal.Body>
               {errorMessage ? (
-                <text className="text-red-500 text-center text-xl">
+                <Text color="error" className=" text-center text-xl">
                   {errorMessage}
-                </text>
+                </Text>
               ) : (
                 <>
                   <Button
@@ -54,7 +54,7 @@ const LoadModal = ({
                     View on Explorer
                   </Button>
                   {showSuccessText && (
-                    <Text b size={14}>
+                    <Text b size={14} className=" text-center text-xl">
                       Your Gift Card Redeem Successfully
                     </Text>
                   )}
