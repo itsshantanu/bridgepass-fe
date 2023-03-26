@@ -61,8 +61,9 @@ const chainConfig: ChainConfigs = {
 
 const PassRedeem = () => {
   const { data: signer } = useSigner();
+  const { address } = useAccount();
 
-  const [address, setAddress] = useState('');
+  const [addr, setAddr] = useState('');
   const [tokenId, setTokenId] = useState('');
   const [selectedOption, setSelectedOption] = useState('option1');
 
@@ -156,7 +157,7 @@ const PassRedeem = () => {
         config.destinationWrapper, // destination wrapper
         config.wethAddress, // weth address
         100000000000000, // amount to receive
-        address, // receiver address
+        addr, // receiver address
         config.destinationDomain, // destination domain
         10000, //slippage
         relayerFee, // relayer fee
@@ -221,8 +222,8 @@ const PassRedeem = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 bg-purple-200 text-black leading-tight focus:outline-none focus:shadow-outline"
             id="address"
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={addr}
+            onChange={(e) => setAddr(e.target.value)}
           />
         </div>
         <div className="mb-4">
