@@ -64,6 +64,11 @@ const chainConfig: ChainConfigs = {
     price: utils.parseEther('0.001'),
     explorer: 'https://sepolia.etherscan.io/tx/',
   },
+  option8: {
+    contractAddress: '0x7bFDe3c8a9444882FbEB20e7CB2c992925102792',
+    price: utils.parseEther('0.0001'),
+    explorer: 'https://explorer.a2.taiko.xyz/tx/',
+  },
 };
 
 const BuyGift = () => {
@@ -204,6 +209,7 @@ const BuyGift = () => {
                 <option value="option5">Optimism-Goerli</option>
                 <option value="option6">Optimism</option>
                 <option value="option7">Sepolia</option>
+                <option value="option8">Taiko</option>
               </select>
             </div>
             <div className="mb-4">

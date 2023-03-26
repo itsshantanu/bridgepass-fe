@@ -92,6 +92,35 @@ const Scroll: Chain = {
   },
   testnet: false,
 };
+const Taiko: Chain = {
+  id: 167004,
+  name: 'Taiko',
+  network: 'taiko',
+  iconUrl:
+    'https://roadtoweb3.infura-ipfs.io/ipfs/QmbFWsnQhJZXjGRy2fiiEdKfxpMAFi4dnb1nKqxzcYjh3R',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Taiko',
+    symbol: 'taiko',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.a2.taiko.xyz'],
+    },
+    public: {
+      http: ['https://rpc.a2.taiko.xyz'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'Taiko', url: 'https://explorer.a2.taiko.xyz' },
+    etherscan: {
+      name: 'Taiko',
+      url: 'https://explorer.a2.taiko.xyz',
+    },
+  },
+  testnet: true,
+};
 
 const { chains, provider } = configureChains(
   [
@@ -103,6 +132,7 @@ const { chains, provider } = configureChains(
     arbitrum,
     optimismGoerli,
     sepolia,
+    Taiko,
   ],
   [
     // this is optional if you want to use your own RPC otherwise it will work with public providers
