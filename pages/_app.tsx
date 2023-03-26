@@ -21,7 +21,7 @@ import {
 // import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { Navbar } from '../components';
+import { Navbar, Footer } from '../components';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -140,6 +140,7 @@ export default function App({ Component, pageProps }: AppProps) {
           >
             <Navbar />
             <Component {...pageProps} />
+            <Footer />
           </RainbowKitProvider>
         </WagmiConfig>
       </NextUIProvider>
