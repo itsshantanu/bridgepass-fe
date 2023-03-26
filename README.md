@@ -11,7 +11,11 @@ Bridge Pass offers a unique cross-chain gift card solution, allowing you to send
 
 ## Bridge Pass Contracts
 
-- (BridgePass Contracts)[https://github.com/karangorania/bridgepass-contracts]
+- [BridgePass Contracts](https://github.com/karangorania/bridgepass-contracts)
+
+## PPT
+
+- [BridgePass PPT](https://1drv.ms/p/s!AiRmcFn-Dq9OblOygO4onR54imc?e=OhL1Ue)
 
 ## How it's works ?
 
