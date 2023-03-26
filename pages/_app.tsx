@@ -9,11 +9,17 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { createTheme, NextUIProvider } from '@nextui-org/react';
 
-// import { Chain } from 'wagmi/chains';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { polygonMumbai, optimism, optimismGoerli, goerli } from 'wagmi/chains';
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
+import {
+  polygonMumbai,
+  optimism,
+  optimismGoerli,
+  goerli,
+  arbitrum,
+  sepolia,
+} from 'wagmi/chains';
+// import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+// import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { Navbar } from '../components';
 
@@ -88,9 +94,19 @@ const Scroll: Chain = {
 };
 
 const { chains, provider } = configureChains(
-  [goerli, ZKEVM, Scroll, polygonMumbai, optimism, optimismGoerli],
   [
-    //  alchemyProvider({ apiKey: 'ejncjnekjcnskcn' }),
+    Scroll,
+    ZKEVM,
+    goerli,
+    polygonMumbai,
+    optimism,
+    arbitrum,
+    optimismGoerli,
+    sepolia,
+  ],
+  [
+    // this is optional if you want to use your own RPC otherwise it will work with public providers
+    //  alchemyProvider({ apiKey: 'YOUR_API_KEY' }),
     publicProvider(),
   ]
 );
