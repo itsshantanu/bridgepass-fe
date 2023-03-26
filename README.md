@@ -9,6 +9,10 @@ Bridge Pass offers a unique cross-chain gift card solution, allowing you to send
 - [Mohit Chandel](https://github.com/mohitchandel)
 - [Karan Goraniya](https://github.com/karangorania)
 
+## Bridge Pass Contracts
+
+- (BridgePass Contracts)[https://github.com/karangorania/bridgepass-contracts]
+
 ## How it's works ?
 
 Bridge Pass leverages the ERC-721 NFT standard to create Soul Bound Tokens, facilitating seamless cross-chain asset transfers through Connext Smart Contracts. For on-chain transfers, Gift Card employs the same ERC-721 NFT standard to ensure a smooth, secure, and efficient process.​
@@ -73,6 +77,7 @@ Gift Card is available on testnet and Mainnet.
 - [ZKEVM](https://testnet-zkevm.polygonscan.com/address/0x7bFDe3c8a9444882FbEB20e7CB2c992925102792)
 - [Optimism-Goerli](https://goerli-optimism.etherscan.io/address/0x7bFDe3c8a9444882FbEB20e7CB2c992925102792)
 - [Sepolia](https://sepolia.etherscan.io/address/0x7bFDe3c8a9444882FbEB20e7CB2c992925102792)
+- [Taiko](https://explorer.a2.taiko.xyz/tx/0x1e5edf5ad38efdcd438759b49d53c15ec5af2698aa9caa224d7693c5019a7e28)
 
 ## Tech Stack
 
