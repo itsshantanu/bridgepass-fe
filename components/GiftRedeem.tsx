@@ -71,7 +71,7 @@ const GiftRedeem = () => {
 
   const closeHandler = () => {
     setVisible(false);
-    console.log('closed');
+    // console.log('closed');
   };
 
   const contractAbi = [
@@ -97,8 +97,6 @@ const GiftRedeem = () => {
     signerOrProvider: signer,
   });
 
-  console.log(selectedOption);
-
   const claimGift = async () => {
     setVisible(true);
     setLoading(true);
@@ -113,10 +111,10 @@ const GiftRedeem = () => {
     } catch (err: any) {
       setLoading(false);
       setIsError(true);
-      console.log(errMsg);
+      // console.log(errMsg);
       //   const msg = err.message;
       //   const match = err.message.match();
-      console.log(err.message);
+      // console.log(err.message);
 
       if (err.message.includes('user rejected transaction')) {
         setErrMsg('You Reject the transaction ');
