@@ -30,12 +30,12 @@ const chainConfig: ChainConfigs = {
     explorer: 'https://goerli-optimism.etherscan.io/tx/',
   },
 
-  // Optimism Mainnet todo
+  // Optimism Mainnet
 
   option3: {
-    contractAddress: '0x7B4e13cDd520a3103423eC5F08D6B50c144fF0Fa',
-    price: utils.parseEther('0.0301'),
-    explorer: 'https://mumbai.polygonscan.com/tx/',
+    contractAddress: '0x463e6d4993d30D9f2987a4C53d4E4a18DE195586',
+    price: utils.parseEther('0.0007'),
+    explorer: 'https://optimistic.etherscan.io/tx/',
   },
 
   // Arbitrum Mainnet todo
@@ -139,74 +139,6 @@ const BridgePass = () => {
 
   return (
     <>
-      {/* <div className="flex flex-col items-center justify-center bg-black p-8 rounded-lg h-screen">
-        <div className="flex items-center justify-center">
-          <Image
-            src={ETH}
-            alt="Image"
-            height={512}
-            width={512}
-            className="object-cover rounded-lg mr-4"
-          />
-          <div className="p-8 rounded-lg bg-purple-200 text-center h-[392px] w-[352px]">
-            <h2 className="text-lg font-medium mb-4 text-black">
-              Buy Bridge Gift Card
-            </h2>
-            <h2 className="text-lg font-thin mb-4 text-black ">
-              This Bridge Gift Card use transfer ETH from one chain to other
-            </h2>
-            <div className="mb-5">
-              <p className="text-gray-600 mr-2 ">Price: 0.0031 ETH</p>
-            </div>
-            
-            <div className="mb-4">
-              <label className="mr-2 text-black" htmlFor="sourceChain">
-                Source Chain:
-              </label>
-              <select
-                className="input"
-                id="sourceChain"
-                value={selectedOption}
-                onChange={(e) => setSelectedOption(e.target.value)}
-              >
-                <option value="option1">Goerli</option>
-                <option value="option2">Optimism-Goerli</option>
-                <option value="option3">Optimism</option>
-                <option value="option4">Arbitrum</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="mr-2 text-black" htmlFor="destinationChain">
-                Destination Wallet:
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                id="address"
-                required={true}
-                type="address"
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            <div className="flex items-center justify-center">
-              <button
-                className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800"
-                onClick={mintNow}
-              >
-                Mint Pass
-              </button>
-            </div>
-            <LoadModal
-              isLoading={loading}
-              visible={visible}
-              closeHandler={closeHandler}
-              hash={hash}
-              explorer={config.explorer}
-              showSuccessText={false}
-              errorMessage={errMsg}
-            />
-          </div>
-        </div>
-      </div> */}
       <div className="flex justify-center mt-[10%]">
         <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-300 via-purple-400 to-purple-600 bg-clip-text text-transparent">
           Buy your Bridge Pass
