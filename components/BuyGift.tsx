@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BigNumber, utils } from 'ethers';
 import { useAccount, useContract, useSigner } from 'wagmi';
 import Image from 'next/image';
@@ -88,10 +88,8 @@ const BuyGift = () => {
   const handler = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
-    console.log('closed');
+    // console.log('closed');
   };
-
-  console.log('now', selectedOption);
 
   const contractAbi = [
     {
@@ -132,14 +130,14 @@ const BuyGift = () => {
       setHash(txResult.transactionHash);
       setLoading(false);
 
-      console.log(txResult);
+      console.log(txResult.transactionHash);
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
       setLoading(false);
       setIsError(true);
       const msg = err.message;
       const match = err.message.match();
-      console.log('karm', err.message);
+      // console.log( err.message);
 
       if (err.message.includes('user rejected transaction')) {
         setErrMsg('You Reject the transaction ');
